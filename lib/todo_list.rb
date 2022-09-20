@@ -3,23 +3,31 @@ class TodoList
     @todo_list = []
   end
 
-  def add(todo) # todo is an instance of Todo
+  def add(todo)
     # Returns nothing
     @todo_list.push(todo)
   end
 
   def incomplete
     # Returns all non-done todos
-    @todo_list.select {|todo|
+    incomplete_list = @todo_list.select {|todo|
       !todo.done?
     }
+
+    incomplete_list.map {|todo|
+      todo.task
+    }.join(', ')
   end
 
   def complete
     # Returns all complete todos
-    @todo_list.select {|todo|
+    complete_list = @todo_list.select {|todo|
       todo.done?
     }
+
+    complete_list.map {|todo|
+      todo.task
+    }.join(', ')
   end
 
   def give_up!
