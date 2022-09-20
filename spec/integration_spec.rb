@@ -64,7 +64,29 @@ RSpec.describe 'TodoList integration' do
     end
   end
 
-  describe 'done?' do
+  describe '#give_up!' do
+    it 'Empties the incomplete todo list' do
+      todo_list = TodoList.new
+      todo = Todo.new('Complete phase 2 challenge 8')
+      todo2 = Todo.new('Complete phase 2 challenge 9')
+      todo_list.add todo
+      todo_list.add todo2
+      todo_list.give_up!
+      expect(todo_list.incomplete).to eq ''
+    end
+
+    it 'Adds all todo objects to complete list' do
+      todo_list = TodoList.new
+      todo = Todo.new('Complete phase 2 challenge 8')
+      todo2 = Todo.new('Complete phase 2 challenge 9')
+      todo_list.add todo
+      todo_list.add todo2
+      todo_list.give_up!
+      expect(todo_list.complete).to eq 'Complete phase 2 challenge 8, Complete phase 2 challenge 9'
+    end
+  end
+
+  describe '#done?' do
     it 'returns false when incomplete' do
       todo = Todo.new('Complete these tests')
       expect(todo.done?).to eq false
