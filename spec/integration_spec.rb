@@ -63,4 +63,17 @@ RSpec.describe 'TodoList integration' do
       expect(todo_list.incomplete).to eq 'Complete phase 2 challenge 8, Complete phase 2 challenge 9'
     end
   end
+
+  describe 'done?' do
+    it 'returns false when incomplete' do
+      todo = Todo.new('Complete these tests')
+      expect(todo.done?).to eq false
+    end
+
+    it 'returns true when complete' do
+      todo = Todo.new('Complete these tests')
+      todo.mark_done!
+      expect(todo.done?).to eq true
+    end
+  end
 end
